@@ -3,7 +3,7 @@ server:
 
 openai:
   api:
-    key: ${OPENAI_API_KEY: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}
+    key: ${OPENAI_API_KEY}
 
 spring:
   datasource:
