@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+  storemanagerdb:  # Updated service name
+    container_name: postgres_container
+    image: postgres:latest
+    networks:
+      - custom_network
+    restart: always
+    environment:
+      POSTGRES_DB: storemanager
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+      PGDATA: /var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4:latest
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: goga.o.gabriel.macbookpro@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: secret
+    ports:
+      - "8080:80"
+    depends_on:
+      - storemanagerdb
+    networks:
+      - custom_network
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+networks:
+  custom_network:
+    driver: bridge
+
+volumes:
+  db-data:
+  pgadmin-data:
