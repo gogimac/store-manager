@@ -28,7 +28,7 @@ spring:
 ### 2. Run PostgreSQL with Docker Compose
 To start the PostgreSQL database with Docker Compose, use:
 ```bash
-docker-compose up
+docker compose up
 ```
 
 ### 3. Start the Application
