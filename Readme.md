@@ -123,6 +123,9 @@ java -jar target/StoreManagerApplication.jar --server.port=8081
 
 7. **Pagination**
     - `GET /api/products/all?page=0&size=10`
+  
+8. **Delete Product**
+    - `DELETE /api/products/8`
 
 ## AI Integration
 - Added Generation content for product description with OpenAIService
