@@ -1,25 +1,44 @@
 server:
-  port: 8081
+  port: 8081  # Application runs on port 8081
 
 openai:
   api:
-    key: ${OPENAI_API_KEY}
+    key: ${OPENAI_API_KEY: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}
 
 spring:
+  application:
+    name: store-manager  # Application name
+
   datasource:
-    url: jdbc:postgresql://localhost:5432/storemanager
-    username: ${DB_USERNAME:admin}
-    password: ${DB_PASSWORD:secret}
+    url: jdbc:postgresql://localhost:5432/storemanager  # PostgreSQL database URL
+    username: ${DB_USERNAME:admin}                     # Database username (default: admin)
+    password: ${DB_PASSWORD:secret}                    # Database password (default: secret)
+    driver-class-name: org.postgresql.Driver           # JDBC driver class
+
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: true
+      ddl-auto: update                                 # Automatically update the database schema
+    show-sql: true                                    # Enable SQL query logging
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect  # PostgreSQL-specific SQL dialect
 
 management:
   endpoints:
     web:
       exposure:
-        include: "*"
+        include: "*"                                  # Expose all management endpoints (modify for production)
+  health:
+    defaults:
+      enabled: true                                   # Enable default health indicators
+  tracing:
+    enabled: true                                     # Enable tracing for observability
+
+logging:
+  # Uncomment to customize console logging pattern
+  #  pattern:
+  #    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} [%X{traceId}]"
+  level:
+    root: info                                        # Set default logging level to INFO
+    ro.ing.api: DEBUG                                 # Set debug level for your application package
+
